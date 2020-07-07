@@ -14,7 +14,8 @@ header i {
 
 /* Main */
 main {
-  margin-top: 100px;
+  margin-top: 110px;
+  height: calc(100vh - 450px);
   flex-direction: column;
 }
 

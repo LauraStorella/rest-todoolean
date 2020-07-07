@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  // ******************** TODOOLEAN | Todo-List ********************
+
   /*   
   Utilizzando le API Todos di Boolean creiamo un’interfaccia in cui possiamo 
   leggere, creare e rimuovere degli elementi da una todo-listEndpoints:
@@ -84,6 +86,26 @@ $(document).ready(function () {
 
 
   // DELETE : Chiamata ajax per eliminazione dati - Metodo DELETE
+  //  ---> creo evento click su icona .delete-btn
+  //  ---> seleziono elmento <li> e rispettivo ID assegnato dall'API (collegati tramite data-attr)
+  //  ---> elimino elemento selezionato
+  $(document).on('click', '.delete-btn', function() {
+    var thisId = $(this).parent().attr('data-id');
+
+    $.ajax(
+      {
+        url: myTodosUrl + thisId,
+        method: "DELETE",
+        success: function (data) {
+          getAllTodos();
+        },
+        error: function () {
+          alert('Errore: impossibile eliminare l\'elemento selezionato.');
+        }
+      }
+    ); // end ajax call
+
+  }); // end on click
 
 
 
