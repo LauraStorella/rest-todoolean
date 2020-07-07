@@ -25,7 +25,7 @@
 
       <main>
         <div class="todo-add">
-          <input id="todo-text" placeholder="Nuovo To-do..."></label>
+          <input id="todo-text" placeholder="Nuovo To-do...">
           <button id="todo-btn"><i class="fas fa-plus"></i> Aggiungi</button>
         </div>
 
@@ -37,7 +37,7 @@
 
       <!-- Handlebars Template TodoList - inizio -->
       <script id="todo-list-template" type="text/x-handlebars-template">
-        <li data-id="{{ id }}"><i class="fas fa-pen-square"></i> {{ text }} <span class="delete-btn"><i class="fas fa-trash-alt"></i></span></li>
+        <li data-id="{{ id }}"><span class="edit-btn"><i class="fas fa-pen-square"></i></span> {{ text }} <span class="delete-btn"><i class="fas fa-trash-alt"></i></span></li>
       </script>
       <!-- Handlebars Template TodoList - fine -->
       
