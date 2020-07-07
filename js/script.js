@@ -12,35 +12,78 @@ $(document).ready(function () {
 
 
   var myTodosUrl = 'http://157.230.17.132:3030/todos/';
+  getAllTodos();
 
 
-  // READ : Chiamata ajax per lettura data - Metodo GET
+  // READ : Chiamata ajax per lettura dati - Metodo GET
   //  ---> Stampo i dati presenti nella lista
-  $.ajax(
-    {
-      url: myTodosUrl,
-      method: "GET",
-      success: function (data) {
-        
-        if ( data.length > 0 ) {      
+  function getAllTodos() {
+    $('#todo-list').html('');
+    $('#todo-text').val('');
 
-          var source = $('#todo-list-template').html();
-          var template = Handlebars.compile(source);
-
-          for (var i = 0; i < data.length; i++) {
-            var thisTodo = data[i];
-
-            var html = template(thisTodo);  
-            $('#todo-list').append(html);
-          } 
-
+    $.ajax(
+      {
+        url: myTodosUrl,
+        method: "GET",
+        success: function (data) {
+          
+          if ( data.length > 0 ) {      
+  
+            var source = $('#todo-list-template').html();
+            var template = Handlebars.compile(source);
+  
+            for (var i = 0; i < data.length; i++) {
+              var thisTodo = data[i];
+  
+              var html = template(thisTodo);  
+              $('#todo-list').append(html);
+            } 
+  
+          }
+        },
+        error: function () {
+          alert('Ops! Si è verificato un errore.');
         }
-      },
-      error: function () {
-        alert('Ops! Si è verificato un errore.');
       }
+    ); // end ajax call
+  } // end fun getAllTodos
+
+
+
+  // CREATE : Chiamata ajax per creazione dati - Metodo POST
+  //  ---> Aggiungo dati alla lista,
+  //  ---> leggo il valore del nuovo dato inserito, salvo e stampo
+  $('#todo-btn').click( function() {
+    var newTodo = $('#todo-text').val();
+
+    if ( newTodo.length > 0 ) {
+
+      $.ajax(
+        {
+          url: myTodosUrl,
+          method: "POST",
+          data: {
+            text: newTodo,
+          },
+          success: function(data) {
+            getAllTodos();
+          },
+          error: function() {
+            alert('Impossibile salvare dati.');
+          }
+        }
+      ); // end ajax call
+
+    } 
+    else {
+      alert('Il campo è vuoto. Inserire nuovo todo.');
     }
-   );
+
+  }); // end click 
+
+
+
+  // DELETE : Chiamata ajax per eliminazione dati - Metodo DELETE
 
 
 

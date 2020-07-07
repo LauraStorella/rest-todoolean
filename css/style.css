@@ -1,10 +1,7 @@
 /* Header */
-header {
-  height: 80px;
-}
-
-header, 
+header,
 main {
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +13,14 @@ header i {
 }
 
 /* Main */
+main {
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.todo-add {
+  margin: 25px 0;
+}
 #todo-list li {
   margin-bottom: 10px;
 }
